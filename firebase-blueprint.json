@@ -1,0 +1,114 @@
+{
+  "entities": {
+    "medicines": {
+      "title": "Medicine",
+      "description": "Medicine product item stored in MedStore inventory",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Commercial or generic name of medicine"
+        },
+        "batch": {
+          "type": "string",
+          "description": "Manufacturing batch identification number"
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry timestamp for the batch"
+        },
+        "stock": {
+          "type": "number",
+          "description": "Available unit quantity in inventory"
+        },
+        "price": {
+          "type": "number",
+          "description": "Unit retail sales price"
+        },
+        "supplier": {
+          "type": "string",
+          "description": "Supplier or pharmaceutical distributor name"
+        }
+      },
+      "required": ["name", "batch", "expiryDate", "stock", "price", "supplier"]
+    },
+    "sales": {
+      "title": "Sale",
+      "description": "Sale transaction record",
+      "type": "object",
+      "properties": {
+        "medicineName": {
+          "type": "string",
+          "description": "Name of the medicine sold"
+        },
+        "medicineId": {
+          "type": "string",
+          "description": "Document ID of the sold medicine"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Quantity units sold"
+        },
+        "totalPrice": {
+          "type": "number",
+          "description": "Calculated total sale price"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Customer purchasing the medication"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when sale occurred"
+        }
+      },
+      "required": ["medicineName", "quantity", "totalPrice", "customerName", "date"]
+    },
+    "users": {
+      "title": "User",
+      "description": "Pharmacy staff or administrator profile account",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the pharmacy staff member"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Staff member login email address"
+        },
+        "role": {
+          "type": "string",
+          "description": "Staff access role: admin, pharmacist, or cashier",
+          "enum": ["admin", "pharmacist", "cashier"]
+        },
+        "storeName": {
+          "type": "string",
+          "description": "Name of the affiliated pharmacy store"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact telephone number"
+        }
+      },
+      "required": ["name", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/medicines/{medicineId}": {
+      "schema": "medicines",
+      "description": "Inventory records for all available pharmacy medicines"
+    },
+    "/sales/{saleId}": {
+      "schema": "sales",
+      "description": "Transaction logs for all customer purchases"
+    },
+    "/users/{userId}": {
+      "schema": "users",
+      "description": "Staff user accounts and role definitions"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "MedStore Manager",
+  "description": "Backend API and inventory management dashboard for MedStore with stock tracking, expiry alerts, and automated sales processing using Firebase Admin SDK.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
